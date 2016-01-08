@@ -21,7 +21,8 @@
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^3.4.2",
     "nodepie": "^0.7.0",
-    "scraper": "0.0.9"
+    "scraper": "0.0.9",
+    "tumblrbot": "^0.1.0"
   },
   "engines": {
     "node": "0.10.x"
