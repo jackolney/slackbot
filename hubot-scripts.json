@@ -1,5 +1,5 @@
 [
-    "email.coffee", 
+    "email.coffee",
     "beerme.coffee",
     "google-images.coffee",
     "brb.coffee",
@@ -14,7 +14,7 @@
     "github-search.coffee",
     "good-night.coffee",
     "google.coffee",
-    "hackernews.coffee"
+    "hackernews.coffee",
     "hangman.coffee",
     "hangout.coffee",
     "hello.coffee",
