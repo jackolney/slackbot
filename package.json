@@ -26,7 +26,8 @@
     "nodepie": "^0.7.0",
     "scraper": "0.0.9",
     "tumblrbot": "^0.1.0",
-    "twit": "^2.1.1"
+    "twit": "^2.1.1",
+    "underscore": "^1.8.3"
   },
   "engines": {
     "node": "0.10.x"
