@@ -24,6 +24,7 @@
     "lodash": "^3.10.1",
     "moment": "^2.11.0",
     "nodepie": "^0.7.0",
+    "request": "^2.67.0",
     "scraper": "0.0.9",
     "tumblrbot": "^0.1.0",
     "twit": "^2.1.1",
