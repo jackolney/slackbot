@@ -1,7 +1,6 @@
 [
     "email.coffee",
     "beerme.coffee",
-    "google-images.coffee",
     "brb.coffee",
     "birthday.coffee",
     "brewerydb.coffee",
@@ -30,7 +29,6 @@
     "offthegrid.coffee",
     "ping.coffee",
     "pizza.coffee",
-    "plusplus.coffee",
     "quote.coffee",
     "reddit-jokes.coffee",
     "remind.coffee",
