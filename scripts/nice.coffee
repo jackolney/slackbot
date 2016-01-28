@@ -6,4 +6,4 @@
 
 module.exports = (robot) ->
   robot.respond /be nice/i, (msg) ->
-    msg.send "okay... I'll be good :simple_smile:"
+    msg.send "Okay... I'll be good :simple_smile:"
