@@ -20,58 +20,58 @@
 #  John Hamelink <john@farmer.io>
 
 
-module.exports = (robot) ->
+# module.exports = (robot) ->
 
-  getTrainTimes = (msg, from, to) ->
-    robot.http("http://ojp.nationalrail.co.uk/service/ldb/liveTrainsJson").query(
-      departing: "true"
-      liveTrainsFrom: from.code
-      liveTrainsTo: to.code
-    ).get() (err, res, body) ->
-    json = JSON.parse(body)
-    if json.trains.length
-      msg.send "Next trains from: #{from.name} to #{to.name}:"
-      i = 0
+#   getTrainTimes = (msg, from, to) ->
+#     robot.http("http://ojp.nationalrail.co.uk/service/ldb/liveTrainsJson").query(
+#       departing: "true"
+#       liveTrainsFrom: from.code
+#       liveTrainsTo: to.code
+#     ).get() (err, res, body) ->
+#     json = JSON.parse(body)
+#     if json.trains.length
+#       msg.send "Next trains from: #{from.name} to #{to.name}:"
+#       i = 0
 
-    while i < json.trains.length
-      station = json.trains[i]
-        if i < 5
-          response = "The #{station[1]} to #{station[2]}"
-          response += " at platform #{station[4]}"  if station[4].length
-          response += " is #{/[^;]*$/.exec(station[3])[0].trim().toLowerCase()}"
-          msg.send response
-          i++
-        else
-          msg.send "Sorry, there's no trains today"
+#     while i < json.trains.length
+#       station = json.trains[i]
+#         if i < 5
+#           response = "The #{station[1]} to #{station[2]}"
+#           response += " at platform #{station[4]}"  if station[4].length
+#           response += " is #{/[^;]*$/.exec(station[3])[0].trim().toLowerCase()}"
+#           msg.send response
+#           i++
+#         else
+#           msg.send "Sorry, there's no trains today"
 
-  getStation = (msg, query, callback) ->
-    robot.http("http://ojp.nationalrail.co.uk/find/stationsDLRLU/" + encodeURIComponent(query)).get() (err, res, body) ->
-      json = JSON.parse(body)
-      if json.length
-        station =
-          code: json[0][0]
-          name: json[0][1]
+#   getStation = (msg, query, callback) ->
+#     robot.http("http://ojp.nationalrail.co.uk/find/stationsDLRLU/" + encodeURIComponent(query)).get() (err, res, body) ->
+#       json = JSON.parse(body)
+#       if json.length
+#         station =
+#           code: json[0][0]
+#           name: json[0][1]
 
-        callback station
-      else
-        msg.send "Couldn't find station: " + query
+#         callback station
+#       else
+#         msg.send "Couldn't find station: " + query
 
-  robot.respond /trains from (.+) to (.+)/i, (msg) ->
-    from = msg.match[1]
-    to = msg.match[2]
-    from = process.env.HUBOT_DEFAULT_STATION  if from.length is 0
-    getStation msg, from, (station) ->
-      from = station
-      getStation msg, to, (station) ->
-        to = station
-        getTrainTimes msg, from, to
+#   robot.respond /trains from (.+) to (.+)/i, (msg) ->
+#     from = msg.match[1]
+#     to = msg.match[2]
+#     from = process.env.HUBOT_DEFAULT_STATION  if from.length is 0
+#     getStation msg, from, (station) ->
+#       from = station
+#       getStation msg, to, (station) ->
+#         to = station
+#         getTrainTimes msg, from, to
 
-  robot.respond /trains to (.+)/i, (msg) ->
-    fromCode = process.env.HUBOT_DEFAULT_STATION
-    from = null
-    to = msg.match[1]
-    getStation msg, fromCode, (station) ->
-      from = station
-      getStation msg, to, (station) ->
-        to = station
-        getTrainTimes msg, from, to
+#   robot.respond /trains to (.+)/i, (msg) ->
+#     fromCode = process.env.HUBOT_DEFAULT_STATION
+#     from = null
+#     to = msg.match[1]
+#     getStation msg, fromCode, (station) ->
+#       from = station
+#       getStation msg, to, (station) ->
+#         to = station
+#         getTrainTimes msg, from, to
