@@ -22,27 +22,27 @@
 
 module.exports = (robot) ->
 
-    getTrainTimes = (msg, from, to) ->
-        robot.http("http://ojp.nationalrail.co.uk/service/ldb/liveTrainsJson").query(
-          departing: "true"
-          liveTrainsFrom: from.code
-          liveTrainsTo: to.code
-        ).get() (err, res, body) ->
-      json = JSON.parse(body)
-      if json.trains.length
-        msg.send "Next trains from: #{from.name} to #{to.name}:"
-        i = 0
+  getTrainTimes = (msg, from, to) ->
+    robot.http("http://ojp.nationalrail.co.uk/service/ldb/liveTrainsJson").query(
+      departing: "true"
+      liveTrainsFrom: from.code
+      liveTrainsTo: to.code
+    ).get() (err, res, body) ->
+    json = JSON.parse(body)
+    if json.trains.length
+      msg.send "Next trains from: #{from.name} to #{to.name}:"
+      i = 0
 
-        while i < json.trains.length
-          station = json.trains[i]
-          if i < 5
-            response = "The #{station[1]} to #{station[2]}"
-            response += " at platform #{station[4]}"  if station[4].length
-            response += " is #{/[^;]*$/.exec(station[3])[0].trim().toLowerCase()}"
-            msg.send response
+    while i < json.trains.length
+      station = json.trains[i]
+        if i < 5
+          response = "The #{station[1]} to #{station[2]}"
+          response += " at platform #{station[4]}"  if station[4].length
+          response += " is #{/[^;]*$/.exec(station[3])[0].trim().toLowerCase()}"
+          msg.send response
           i++
-      else
-        msg.send "Sorry, there's no trains today"
+        else
+          msg.send "Sorry, there's no trains today"
 
   getStation = (msg, query, callback) ->
     robot.http("http://ojp.nationalrail.co.uk/find/stationsDLRLU/" + encodeURIComponent(query)).get() (err, res, body) ->
@@ -75,7 +75,3 @@ module.exports = (robot) ->
       getStation msg, to, (station) ->
         to = station
         getTrainTimes msg, from, to
-
-# 78c35d5c-724c-4532-8b7b-62f327e51829
-# /next/PAD/{filterType}/{filterCRSs|StationNames}?accessToken={Your GUID token}
-
