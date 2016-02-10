@@ -3,7 +3,10 @@
 #
 # Commands:
 #   hubot greet - Say hello to the world
-#
+#   hubot pub - if you mention the pub, hubot will leap at the chance
+#   hubot lunch - if you mention lunch, hubot will ask you to get him some
+#   hubot windows - if you mention an OS that is not Unix-based, hubot will be mad
+#   hubot how are you? - ask hubot how he is
 
 module.exports = (robot) ->
     robot.respond /greet/i, (msg) ->
@@ -26,5 +29,4 @@ module.exports = (robot) ->
     ]
 
     robot.respond /how are you?/, (msg) ->
-        chosen_response = msg.random [1..4]
         msg.send msg.random howareyou_responses

@@ -21,12 +21,13 @@
 
 
 module.exports = (robot) ->
-  getTrainTimes = (msg, from, to) ->
-    robot.http("http://ojp.nationalrail.co.uk/service/ldb/liveTrainsJson").query(
-      departing: "true"
-      liveTrainsFrom: from.code
-      liveTrainsTo: to.code
-    ).get() (err, res, body) ->
+
+    getTrainTimes = (msg, from, to) ->
+        robot.http("http://ojp.nationalrail.co.uk/service/ldb/liveTrainsJson").query(
+          departing: "true"
+          liveTrainsFrom: from.code
+          liveTrainsTo: to.code
+        ).get() (err, res, body) ->
       json = JSON.parse(body)
       if json.trains.length
         msg.send "Next trains from: #{from.name} to #{to.name}:"
@@ -74,3 +75,7 @@ module.exports = (robot) ->
       getStation msg, to, (station) ->
         to = station
         getTrainTimes msg, from, to
+
+# 78c35d5c-724c-4532-8b7b-62f327e51829
+# /next/PAD/{filterType}/{filterCRSs|StationNames}?accessToken={Your GUID token}
+
