@@ -31,7 +31,7 @@ module.exports = (robot) ->
             .get() (err, httpRes, body) ->
                 json = JSON.parse(body)
                 if json.services.length
-                    res.send "Next trains from: #{from} to #{to}:"
+                    res.send "Next trains from #{from} to #{to}:"
                     i = 0
                     while i < json.services.length
                         train = json.services[i]
